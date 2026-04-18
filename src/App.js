@@ -1,8 +1,4 @@
-// ═══════════════════════════════════════════════════════════════════════════
-//  PCORP SALES TRACKER  —  Web + Mobile  |  Real-time Supabase Sync
-//  Works online (Supabase) or offline (localStorage fallback)
-// ═══════════════════════════════════════════════════════════════════════════
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   PieChart, Pie, Cell,
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
@@ -37,7 +33,6 @@ const STATUS_CFG = {
 const STATUS_ORDER  = ["Win","Negotiation","On-bidding","Revision","Loss"];
 const CHART_COLORS  = { Win:"#00B050",Negotiation:"#FFC000","On-bidding":"#2E75B6",Revision:"#ED7D31",Loss:"#C00000" };
 const LS_KEY        = "pcorp_tracker_v5";
-const LS_FALLBACK   = "pcorp_offline";
 
 // ─── Business logic ───────────────────────────────────────────────────────────
 function getStatus(w, r) {
@@ -545,7 +540,6 @@ export default function App() {
   const [lastImport,   setLastImport]   = useState(null);
   const [loaded,       setLoaded]       = useState(false);
   const [onlineMode,   setOnlineMode]   = useState(true);     // true = Supabase, false = localStorage
-  const toastTimer = useRef(null);
 
   // ── Check if Supabase is configured ──────────────────────────────────────
   const supabaseConfigured =
