@@ -1,0 +1,14 @@
+{
+  "appId": "com.pcorp.salestracker",
+  "appName": "PCORP Sales Tracker",
+  "webDir": "build",
+  "server": {
+    "androidScheme": "https"
+  },
+  "ios": {
+    "contentInset": "automatic"
+  },
+  "android": {
+    "allowMixedContent": true
+  }
+}
