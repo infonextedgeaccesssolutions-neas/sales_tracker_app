@@ -1,0 +1,13 @@
+{
+  "buildCommand": "next build",
+  "outputDirectory": ".next",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "redirects": [
+    {
+      "source": "/:path*",
+      "destination": "/:path*",
+      "permanent": false
+    }
+  ]
+}
