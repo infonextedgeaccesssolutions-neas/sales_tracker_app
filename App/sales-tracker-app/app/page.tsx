@@ -1,3 +1,5 @@
+"use client";
+
 // Sales Tracker App - Deployed via Vercel
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, LineChart, Line } from "recharts";
