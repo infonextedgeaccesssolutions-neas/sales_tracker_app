@@ -191,66 +191,6 @@ function ConfirmDialog({ msg, onConfirm, onCancel }) {
   );
 }
 
-function ProposalCard({ row, onEdit, onDelete, dark }) {
-  const c = STATUS_CONFIG[row.status] || {};
-  return (
-    <div style={{ background:"var(--color-background-primary)", border:"0.5px solid var(--color-border-tertiary)",
-      borderRadius:12, overflow:"hidden", marginBottom:8,
-      borderLeft:`3px solid ${c.color||"#ccc"}` }}>
-      <div style={{ padding:"13px 14px" }}>
-        <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:9 }}>
-          <div style={{ display:"flex", alignItems:"center", gap:7, minWidth:0 }}>
-            <Badge status={row.status} dark={dark} />
-            <span style={{ fontSize:13, fontWeight:500, overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap" }}>{row.proposal}</span>
-          </div>
-          <div style={{ display:"flex", gap:5, flexShrink:0, marginLeft:8 }}>
-            <button onClick={() => onEdit(row)} style={{ background:"var(--color-background-secondary)", border:"0.5px solid var(--color-border-secondary)",
-              borderRadius:7, padding:"5px 10px", fontSize:12, cursor:"pointer", color:"var(--color-text-secondary)",
-              display:"flex", alignItems:"center", gap:4 }}>
-              {Icon.Edit} Edit
-            </button>
-            <button onClick={() => onDelete(row)} style={{ background:"none", border:"0.5px solid var(--color-border-secondary)",
-              borderRadius:7, padding:"5px 8px", cursor:"pointer", color:"var(--color-text-tertiary)",
-              display:"flex", alignItems:"center" }}>
-              {Icon.Trash}
-            </button>
-          </div>
-        </div>
-
-        {/* Win rate progress bar */}
-        <div style={{ marginBottom:9 }}>
-          <div style={{ display:"flex", justifyContent:"space-between", marginBottom:3 }}>
-            <span style={{ fontSize:10, color:"var(--color-text-tertiary)", textTransform:"uppercase", letterSpacing:"0.3px" }}>Win probability</span>
-            <span style={{ fontSize:10, fontWeight:500, color: c.color }}>{fmtPct(row.winRate)}</span>
-          </div>
-          <div style={{ height:4, background:"var(--color-background-secondary)", borderRadius:2, overflow:"hidden" }}>
-            <div style={{ height:"100%", width:fmtPct(row.winRate), background:c.color, borderRadius:2, transition:"width 0.3s" }} />
-          </div>
-        </div>
-
-        <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:"7px 8px" }}>
-          <Stat label="Cost"    val={fmtM(row.cost)} />
-          <Stat label="Markup"  val={fmtPct(row.markup)} />
-          <Stat label="Loss Rate" val={fmtPct(1-row.winRate)} />
-          {row.pipelineValue > 0 && <Stat label="Pipeline" val={fmtM(row.pipelineValue)} color="#378ADD" />}
-          {row.totalRevenue  > 0 && <Stat label="Revenue"  val={fmtM(row.totalRevenue)}  color="#1D9E75" />}
-          {row.revisions     > 0 && <Stat label="Revisions" val={fmtM(row.revisions)}    color={STATUS_CONFIG.Revision.color} />}
-        </div>
-        {row.comments && (
-          <div style={{ marginTop:9, fontSize:11, color:"var(--color-text-secondary)",
-            borderTop:"0.5px solid var(--color-border-tertiary)", paddingTop:8,
-            display:"flex", gap:5, alignItems:"flex-start" }}>
-            <span style={{ flexShrink:0, opacity:0.5 }}>
-              <svg width="11" height="11" fill="none" stroke="currentColor" strokeWidth="1.6" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-            </span>
-            {row.comments}
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
 function BottomSheet({ title, onClose, children }) {
   return (
     <div style={{ position:"absolute", inset:0, background:"rgba(0,0,0,0.42)", display:"flex",
